@@ -25,9 +25,10 @@ on:
        default: solutions/
 env:
 #edit your values here
-  ENVIRONMENT_URL: 'orgebad7637.crm.dynamics.com'
+  ENVIRONMENT_URL: 'https://orgebad7637.crm.dynamics.com'
   CLIENT_ID: '54b35cb3-ec7d-4f5e-be38-67ed9cf311f3'
   TENANT_ID: 'fd41ee0d-0d97-4102-9a50-c7c3c5470454'
+  client-secret: 'f4z8Q~ulO6sJ3t~sE0C.xqKmRxCZhTytfF6aEcYu'
 permissions:
   contents: write
 jobs:
