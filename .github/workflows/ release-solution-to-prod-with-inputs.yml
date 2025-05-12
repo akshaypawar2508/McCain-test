@@ -92,12 +92,13 @@ jobs:
         managed: true
         solution-output-file: ${{ inputs.solution_shipping_folder}}/${{ inputs.solution_name }}_managed.zip
         
-    - name: Prepare solution changes for check-in into source control
+    - name: branch-solution, prepare it for a PullRequest
       uses: akshaypawar2508/powerplatform-actions/branch-solution@v0
       with:
-        solution-folder: 'out/solutions/solution one'
-        solution-target-folder: ${{ github.event.inputs.solution_target_folder}}/${{ github.event.inputs.solution_name }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+        solution-folder: ${{ github.event.inputs.solution_source_folder}}/${{ github.event.inputs.solution_name }}
+        solution-target-folder: ${{ github.event.inputs.solution_release_folder}}/${{ github.event.inputs.solution_name }}
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        allow-empty-commit: true
         
 #    - name: Upload the ready to ship solution to GH artifact store
  #     uses: actions/upload-artifact@v2.3.1
