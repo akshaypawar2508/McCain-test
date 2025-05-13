@@ -1,7 +1,7 @@
-name: release-solution-to-prod-reusable
+name: release-solution-to-test-reusable
 # Reusable workflow
 # convert solution to managed (using a build PowerPlatform environment for the conversion)
-# upload the solution to the GitHub artifacts and deploy to the PROD environment
+# upload the solution to the GitHub artifacts and deploy to the test environment
 
 on:
   workflow_call:
@@ -30,8 +30,8 @@ on:
         description: 'Build environment URL.'
         type: string
         required: true      
-      PRODUCTION_ENVIRONMENT_URL: 
-        description: 'Production environment URL.'
+      testUCTION_ENVIRONMENT_URL: 
+        description: 'testuction environment URL.'
         type: string
         required: true
       CLIENT_ID: 
@@ -61,7 +61,7 @@ jobs:
       with:
         lfs: true
 
-    - name: SonarQube Scan
+    - name: SonarCloud Scan
       uses: SonarSource/sonarqube-scan-action@v5
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -96,14 +96,6 @@ jobs:
         solution-name: ${{ inputs.solution_name }}
         managed: true
         solution-output-file: ${{ inputs.solution_shipping_folder }}/${{ inputs.solution_name }}_managed.zip
-        
-    - name: Branch solution - prepare for PR
-      uses: akshaypawar2508/powerplatform-actions/branch-solution@v0
-      with:
-        solution-folder: ${{ inputs.solution_source_folder }}/${{ inputs.solution_name }}
-        solution-target-folder: ${{ inputs.solution_release_folder }}/${{ inputs.solution_name }}
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        allow-empty-commit: true
 
     - name: Upload the ready to ship solution to GH artifact store
       uses: actions/upload-artifact@v4
@@ -111,7 +103,7 @@ jobs:
         name: managedSolutions
         path: ${{ inputs.solution_shipping_folder }}/
 
-  release-to-prod:
+  release-to-test:
     needs: convert-to-managed
     runs-on: ubuntu-latest
     env:
@@ -131,10 +123,10 @@ jobs:
         name: managedSolutions
         path: ${{ inputs.solution_release_folder }}
 
-    - name: Import solution to prod environment
+    - name: Import solution to test environment
       uses: akshaypawar2508/powerplatform-actions/import-solution@v0
       with:
-        environment-url: ${{ inputs.PRODUCTION_ENVIRONMENT_URL }}
+        environment-url: ${{ inputs.TEST_ENVIRONMENT_URL }}
         app-id: ${{ inputs.CLIENT_ID }}
         client-secret: ${{ secrets.POWERAPPS }}
         tenant-id: ${{ inputs.TENANT_ID }}
