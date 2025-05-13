@@ -46,7 +46,6 @@ on:
       POWERAPPS:
         description: 'The secret value for authentication using SPN'
         required: true
-		
       SONAR_TOKEN:
         description: 'SonarCloud token'
         required: true
