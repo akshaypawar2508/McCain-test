@@ -19,3 +19,4 @@ jobs:
       TENANT_ID: 'fd41ee0d-0d97-4102-9a50-c7c3c5470454'     
     secrets:
       POWERAPPS: ${{ secrets.POWERAPPS }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
