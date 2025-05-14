@@ -30,8 +30,8 @@ on:
         description: 'Build environment URL.'
         type: string
         required: true      
-      testUCTION_ENVIRONMENT_URL: 
-        description: 'testuction environment URL.'
+      TEST_ENVIRONMENT_URL:: 
+        description: 'TEST_ENVIRONMENT_URL:.'
         type: string
         required: true
       CLIENT_ID: 
