@@ -1,12 +1,12 @@
 name: Release action
-# Trigger when a PR is merged into the test branch
+# Trigger when a PR is merged into the Test branch
 
 on:
   pull_request:
     types:
       - closed
     branches:
-      - test
+      - Test
 
 permissions:
   contents: write
