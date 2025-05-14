@@ -1,18 +1,22 @@
 name: Release action
-# Call the reusable workflow release-solution-with-inputs.yml
-# Release your solution to prod when you create a new release.
+# Trigger when a PR is merged into the test branch
 
 on:
-  workflow_dispatch:      
+  pull_request:
+    types:
+      - closed
+    branches:
+      - test
+
 permissions:
   contents: write
+
 jobs:
   Release-solution-Akshaydev:
+    if: github.event.pull_request.merged == true
     uses: ./.github/workflows/release-solution-to-test-with-inputs.yml
     with:
-      #You can specify the solution name here
       solution_name: Akshaydev
-      #Update your values here
       BUILD_ENVIRONMENT_URL: 'https://orgebad7637.crm.dynamics.com'      
       TEST_ENVIRONMENT_URL: 'https://org5c56c7aa.crm.dynamics.com'
       CLIENT_ID: '54b35cb3-ec7d-4f5e-be38-67ed9cf311f3'
