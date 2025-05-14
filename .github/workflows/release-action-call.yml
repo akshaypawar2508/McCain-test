@@ -13,7 +13,6 @@ permissions:
 
 jobs:
   Release-solution-Akshaydev:
-    if: github.event.pull_request.merged == true
     uses: ./.github/workflows/release-solution-to-test-with-inputs.yml
     with:
       solution_name: Akshaydev
