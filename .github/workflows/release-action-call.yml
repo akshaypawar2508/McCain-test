@@ -1,5 +1,4 @@
 name: Release action
-# Trigger when a PR is merged into the Test branch
 
 on:
   pull_request:
