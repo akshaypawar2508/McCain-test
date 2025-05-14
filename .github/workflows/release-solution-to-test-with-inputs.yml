@@ -29,7 +29,7 @@ on:
       BUILD_ENVIRONMENT_URL:
         description: 'Build environment URL.'
         type: string
-        required: true      
+        required: true
       TEST_ENVIRONMENT_URL: 
         description: 'TEST_ENVIRONMENT_URL.'
         type: string
