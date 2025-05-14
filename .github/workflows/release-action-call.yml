@@ -2,8 +2,9 @@ name: Release action
 # Trigger when a PR is merged into the Test branch
 
 on:
-    branches:
-      - Test
+    push:
+        branches:
+          - Test
 
 permissions:
   contents: write
