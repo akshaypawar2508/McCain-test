@@ -1,22 +1,24 @@
 name: Release action
-# Call the reusable workflow release-solution-with-inputs.yml
-
 
 on:
-  workflow_dispatch:      
+  pull_request:
+    types:
+      - closed
+    branches:
+      - Test
+
 permissions:
   contents: write
+
 jobs:
   Release-solution-Akshaydev:
-    uses: ./.github/workflows/ release-solution-to-prod-with-inputs.yml
+    uses: ./.github/workflows/release-solution-to-test-with-inputs.yml
     with:
-      #You can specify the solution name here
       solution_name: Akshaydev
-      #Update your values here
-      BUILD_ENVIRONMENT_URL: 'https://orgebad7637.crm.dynamics.com'      
+      BUILD_ENVIRONMENT_URL: 'https://orgebad7637.crm.dynamics.com'
       TEST_ENVIRONMENT_URL: 'https://org5c56c7aa.crm.dynamics.com'
       CLIENT_ID: '54b35cb3-ec7d-4f5e-be38-67ed9cf311f3'
-      TENANT_ID: 'fd41ee0d-0d97-4102-9a50-c7c3c5470454'     
+      TENANT_ID: 'fd41ee0d-0d97-4102-9a50-c7c3c5470454'
     secrets:
       POWERAPPS: ${{ secrets.POWERAPPS }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
