@@ -37,9 +37,7 @@ jobs:
           if [[ "$REF_TEXT_LOWER" == *"solution:akshaydev"* ]]; then
             echo "solution=Akshaydev" >> $GITHUB_OUTPUT
           elif [[ "$REF_TEXT_LOWER" == *"solution:crde66f"* ]]; then
-            echo "solution=CustomerMgmt" >> $GITHUB_OUTPUT
-          elif [[ "$REF_TEXT_LOWER" == *"solution:salesinsights"* ]]; then
-            echo "solution=SalesInsights" >> $GITHUB_OUTPUT
+            echo "solution=crde66f" >> $GITHUB_OUTPUT
           else
             echo "No valid solution specified in PR title or commit message."
             exit 1
