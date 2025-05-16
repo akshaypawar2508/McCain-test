@@ -1,19 +1,24 @@
 name: Release action
-# Trigger when a PR is merged into the Test branch
 
 on:
-    push:
-        branches:
-          - Test
+  push:
+    branches:
+      - Test
 
 permissions:
   contents: write
 
 jobs:
-  Release-solution-Akshaydev:
+  release-solutions:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        solution_name: [Akshaydev, CustomerMgmt, SalesInsights]
+
     uses: ./.github/workflows/release-solution-to-test-with-inputs.yml
     with:
-      solution_name: Akshaydev
+      solution_name: ${{ matrix.solution_name }}
       BUILD_ENVIRONMENT_URL: 'https://orgebad7637.crm.dynamics.com'
       TEST_ENVIRONMENT_URL: 'https://org5c56c7aa.crm.dynamics.com'
       CLIENT_ID: '54b35cb3-ec7d-4f5e-be38-67ed9cf311f3'
