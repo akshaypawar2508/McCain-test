@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      solution: ${{ steps.vars.outputs.solution }}
+      solution: ${{ steps.set-solution.outputs.solution }}
 
     steps:
       - name: Checkout repository
@@ -36,19 +36,16 @@ jobs:
             echo "solution=Akshaydev" >> $GITHUB_OUTPUT
           elif [[ "$REF_TEXT_LOWER" == *"solution:crde66f"* ]]; then
             echo "solution=Crde66f" >> $GITHUB_OUTPUT
-          elif [[ "$REF_TEXT_LOWER" == *"solution:salesinsights"* ]]; then
-            echo "solution=SalesInsights" >> $GITHUB_OUTPUT
           else
             echo "No valid solution specified in PR title or commit message."
             exit 1
           fi
-          
+
   call-release-workflow:
     needs: release-solution
     uses: ./.github/workflows/release-solution-to-test-with-inputs.yml
     with:
-
-      solution_name: ${{ needs.determine-solution.outputs.solution }}
+      solution_name: ${{ needs.release-solution.outputs.solution }}
       BUILD_ENVIRONMENT_URL: 'https://orgebad7637.crm.dynamics.com'
       TEST_ENVIRONMENT_URL: 'https://org5c56c7aa.crm.dynamics.com'
       CLIENT_ID: '54b35cb3-ec7d-4f5e-be38-67ed9cf311f3'
