@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.25041.248" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.25041.248" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.25041.00248">
+<ImportExportXml version="9.2.25042.234" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.25042.234" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.25042.00234">
   <SolutionManifest>
     <UniqueName>Akshaydev</UniqueName>
     <LocalizedNames>
@@ -78,6 +78,7 @@
       </Addresses>
     </Publisher>
     <RootComponents>
+      <RootComponent type="1" schemaName="almlab_test1" behavior="0" />
       <RootComponent type="80" schemaName="mspp_PowerPageManagement" behavior="0" />
     </RootComponents>
     <MissingDependencies>
