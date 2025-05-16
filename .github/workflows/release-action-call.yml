@@ -48,7 +48,7 @@ jobs:
     uses: ./.github/workflows/release-solution-to-test-with-inputs.yml
     with:
 
-      solution_name: ${{ needs.release-solution.outputs.solution }}
+      solution_name: ${{ needs.determine-solution.outputs.solution }}
       BUILD_ENVIRONMENT_URL: 'https://orgebad7637.crm.dynamics.com'
       TEST_ENVIRONMENT_URL: 'https://org5c56c7aa.crm.dynamics.com'
       CLIENT_ID: '54b35cb3-ec7d-4f5e-be38-67ed9cf311f3'
