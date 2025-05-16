@@ -12,7 +12,7 @@ on:
         type: choice
         options:
           - Akshaydev
-          - Common Data Services Default Solution
+          - Crde66f
         default: Akshaydev
        #Do Not change these values
       solution_exported_folder:
