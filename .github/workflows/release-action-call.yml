@@ -16,20 +16,18 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      solution: ${{ steps.vars.outputs.solution }}
+      solution: ${{ steps.set-solution.outputs.solution }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Determine solution from PR title or commit message
-
-        id: vars
+        id: set-solution
         run: |
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            REF_TEXT="${{ github.event.pull_request.title }}"
-          else
-            REF_TEXT="${{ github.event.head_commit.message }}"
+          REF_TEXT="${{ github.event.pull_request.title }}"
+          if [[ -z "$REF_TEXT" ]]; then
+            REF_TEXT=$(git log -1 --pretty=%B)
           fi
 
           REF_TEXT_LOWER=$(echo "$REF_TEXT" | tr '[:upper:]' '[:lower:]')
@@ -37,9 +35,7 @@ jobs:
           if [[ "$REF_TEXT_LOWER" == *"solution:akshaydev"* ]]; then
             echo "solution=Akshaydev" >> $GITHUB_OUTPUT
           elif [[ "$REF_TEXT_LOWER" == *"solution:crde66f"* ]]; then
-            echo "solution=CustomerMgmt" >> $GITHUB_OUTPUT
-          elif [[ "$REF_TEXT_LOWER" == *"solution:salesinsights"* ]]; then
-            echo "solution=SalesInsights" >> $GITHUB_OUTPUT
+            echo "solution=Crde66f" >> $GITHUB_OUTPUT
           else
             echo "No valid solution specified in PR title or commit message."
             exit 1
@@ -49,7 +45,6 @@ jobs:
     needs: release-solution
     uses: ./.github/workflows/release-solution-to-test-with-inputs.yml
     with:
-
       solution_name: ${{ needs.release-solution.outputs.solution }}
       BUILD_ENVIRONMENT_URL: 'https://orgebad7637.crm.dynamics.com'
       TEST_ENVIRONMENT_URL: 'https://org5c56c7aa.crm.dynamics.com'

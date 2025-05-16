@@ -79,6 +79,7 @@
     </Publisher>
     <RootComponents>
       <RootComponent type="1" schemaName="creee_testtableforcicd" behavior="0" />
+      <RootComponent type="29" id="{d02b74fd-5932-f011-8c4e-00224808c7a1}" behavior="0" />
     </RootComponents>
     <MissingDependencies />
   </SolutionManifest>
