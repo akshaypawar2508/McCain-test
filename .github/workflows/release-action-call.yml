@@ -15,12 +15,6 @@ jobs:
   release-solution:
     runs-on: ubuntu-latest
 
-    env:
-      BUILD_ENVIRONMENT_URL: 'https://orgebad7637.crm.dynamics.com'
-      TEST_ENVIRONMENT_URL: 'https://org5c56c7aa.crm.dynamics.com'
-      CLIENT_ID: '54b35cb3-ec7d-4f5e-be38-67ed9cf311f3'
-      TENANT_ID: 'fd41ee0d-0d97-4102-9a50-c7c5470454'
-
     outputs:
       solution: ${{ steps.vars.outputs.solution }}
 
@@ -57,10 +51,9 @@ jobs:
     with:
 
       solution_name: ${{ needs.release-solution.outputs.solution }}
-
-      BUILD_ENVIRONMENT_URL: ${{ env.BUILD_ENVIRONMENT_URL }}
-      TEST_ENVIRONMENT_URL: ${{ env.TEST_ENVIRONMENT_URL }}
-      CLIENT_ID: ${{ env.CLIENT_ID }}
-      TENANT_ID: ${{ env.TENANT_ID }}
+      BUILD_ENVIRONMENT_URL: 'https://orgebad7637.crm.dynamics.com'
+      TEST_ENVIRONMENT_URL: 'https://org5c56c7aa.crm.dynamics.com'
+      CLIENT_ID: '54b35cb3-ec7d-4f5e-be38-67ed9cf311f3'
+      TENANT_ID: 'fd41ee0d-0d97-4102-9a50-c7c3c5470454'
       POWERAPPS: ${{ secrets.POWERAPPS }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
