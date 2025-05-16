@@ -9,20 +9,38 @@ permissions:
   contents: write
 
 jobs:
-  release-solutions:
+  release-solution:
     runs-on: windows-latest
 
-    strategy:
-      matrix:
-        solution_name: [Akshaydev, CustomerMgmt, SalesInsights]
-
-    uses: ./.github/workflows/release-solution-to-test-with-inputs.yml
-    with:
-      solution_name: ${{ matrix.solution_name }}
+    env:
       BUILD_ENVIRONMENT_URL: 'https://orgebad7637.crm.dynamics.com'
       TEST_ENVIRONMENT_URL: 'https://org5c56c7aa.crm.dynamics.com'
       CLIENT_ID: '54b35cb3-ec7d-4f5e-be38-67ed9cf311f3'
-      TENANT_ID: 'fd41ee0d-0d97-4102-9a50-c7c3c5470454'
-    secrets:
-      POWERAPPS: ${{ secrets.POWERAPPS }}
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      TENANT_ID: 'fd41ee0d-0d97-4102-9a50-c7c5470454'
+
+    steps:
+      - name: Determine solution to deploy
+        id: vars
+        run: |
+          echo "COMMIT_MSG=${{ github.event.head_commit.message }}" >> $GITHUB_ENV
+          if [[ "${{ github.event.head_commit.message }}" == *"solution:Akshaydev"* ]]; then
+            echo "SOLUTION=Akshaydev" >> $GITHUB_ENV
+          elif [[ "${{ github.event.head_commit.message }}" == *"solution:CustomerMgmt"* ]]; then
+            echo "SOLUTION=CustomerMgmt" >> $GITHUB_ENV
+          elif [[ "${{ github.event.head_commit.message }}" == *"solution:SalesInsights"* ]]; then
+            echo "SOLUTION=SalesInsights" >> $GITHUB_ENV
+          else
+            echo "No valid solution specified in commit message."
+            exit 1
+          fi
+
+      - name: Deploy solution
+        uses: ./.github/workflows/release-solution-to-test-with-inputs.yml
+        with:
+          solution_name: ${{ env.SOLUTION }}
+          BUILD_ENVIRONMENT_URL: ${{ env.BUILD_ENVIRONMENT_URL }}
+          TEST_ENVIRONMENT_URL: ${{ env.TEST_ENVIRONMENT_URL }}
+          CLIENT_ID: ${{ env.CLIENT_ID }}
+          TENANT_ID: ${{ env.TENANT_ID }}
+          POWERAPPS: ${{ secrets.POWERAPPS }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
