@@ -23,12 +23,15 @@ jobs:
       - name: Determine solution to deploy
         id: vars
         run: |
-          echo "COMMIT_MSG=${{ github.event.head_commit.message }}" >> $GITHUB_ENV
-          if [[ "${{ github.event.head_commit.message }}" == *"solution:Akshaydev"* ]]; then
+          COMMIT_MSG="${{ github.event.head_commit.message }}"
+          COMMIT_MSG_LOWER=$(echo "$COMMIT_MSG" | tr '[:upper:]' '[:lower:]')
+          echo "COMMIT_MSG=$COMMIT_MSG" >> $GITHUB_ENV
+
+          if [[ "$COMMIT_MSG_LOWER" == *"solution:akshaydev"* ]]; then
             echo "SOLUTION=Akshaydev" >> $GITHUB_ENV
-          elif [[ "${{ github.event.head_commit.message }}" == *"solution:Crde66f"* ]]; then
+          elif [[ "$COMMIT_MSG_LOWER" == *"solution:crde66f"* ]]; then
             echo "SOLUTION=CustomerMgmt" >> $GITHUB_ENV
-          elif [[ "${{ github.event.head_commit.message }}" == *"solution:SalesInsights"* ]]; then
+          elif [[ "$COMMIT_MSG_LOWER" == *"solution:salesinsights"* ]]; then
             echo "SOLUTION=SalesInsights" >> $GITHUB_ENV
           else
             echo "No valid solution specified in commit message."
