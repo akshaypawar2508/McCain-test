@@ -7,8 +7,12 @@ on:
     inputs:
       # Change this value
       solution_name:
-        description: 'name of the solution to worked on from Power Platform'
+        description: 'Select the solution to work on from Power Platform'
         required: true
+        type: choice
+        options:
+          - Akshaydev
+          - Common Data Services Default Solution
         default: Akshaydev
        #Do Not change these values
       solution_exported_folder:
