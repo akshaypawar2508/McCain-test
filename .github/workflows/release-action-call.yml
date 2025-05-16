@@ -53,7 +53,7 @@ jobs:
 
   call-release-workflow:
     needs: release-solution
-    uses: ./.github/workflows/release-solution-to-test-reusable.yml
+    uses: ./.github/workflows/release-solution-to-test-with-inputs.yml
     with:
 
       solution_name: ${{ needs.release-solution.outputs.solution }}
