@@ -12,7 +12,7 @@ on:
         type: string
         default: out/ship/
       solution_outbound_folder:
-        description: 'Staging the unpacked solution folder before check-in *do not change*'
+        description: 'Staging the unpacked solution folder before check-in *do not change* '
         type: string
         default: out/solutions/
       solution_source_folder: 
