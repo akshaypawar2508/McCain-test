@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - Test
+  push:
+    branches:
+      - Test
 
 permissions:
   contents: write
@@ -18,25 +21,32 @@ jobs:
       CLIENT_ID: '54b35cb3-ec7d-4f5e-be38-67ed9cf311f3'
       TENANT_ID: 'fd41ee0d-0d97-4102-9a50-c7c5470454'
 
+    outputs:
+      solution: ${{ steps.vars.outputs.solution }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Determine solution to deploy from PR title
+      - name: Determine solution from PR title or commit message
         id: vars
         run: |
-          PR_TITLE="${{ github.event.pull_request.title }}"
-          PR_TITLE_LOWER=$(echo "$PR_TITLE" | tr '[:upper:]' '[:lower:]')
-          echo "PR_TITLE=$PR_TITLE" >> $GITHUB_ENV
-
-          if [[ "$PR_TITLE_LOWER" == *"solution:akshaydev"* ]]; then
-            echo "SOLUTION=Akshaydev" >> $GITHUB_ENV
-          elif [[ "$PR_TITLE_LOWER" == *"solution:crde66f"* ]]; then
-            echo "SOLUTION=CustomerMgmt" >> $GITHUB_ENV
-          elif [[ "$PR_TITLE_LOWER" == *"solution:salesinsights"* ]]; then
-            echo "SOLUTION=SalesInsights" >> $GITHUB_ENV
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            REF_TEXT="${{ github.event.pull_request.title }}"
           else
-            echo "No valid solution specified in PR title."
+            REF_TEXT="${{ github.event.head_commit.message }}"
+          fi
+
+          REF_TEXT_LOWER=$(echo "$REF_TEXT" | tr '[:upper:]' '[:lower:]')
+
+          if [[ "$REF_TEXT_LOWER" == *"solution:akshaydev"* ]]; then
+            echo "solution=Akshaydev" >> $GITHUB_OUTPUT
+          elif [[ "$REF_TEXT_LOWER" == *"solution:crde66f"* ]]; then
+            echo "solution=CustomerMgmt" >> $GITHUB_OUTPUT
+          elif [[ "$REF_TEXT_LOWER" == *"solution:salesinsights"* ]]; then
+            echo "solution=SalesInsights" >> $GITHUB_OUTPUT
+          else
+            echo "No valid solution specified in PR title or commit message."
             exit 1
           fi
 
@@ -44,7 +54,7 @@ jobs:
     needs: release-solution
     uses: ./.github/workflows/release-solution-to-test-reusable.yml
     with:
-      solution_name: ${{ env.SOLUTION }}
+      solution_name: ${{ needs.release-solution.outputs.solution }}
       BUILD_ENVIRONMENT_URL: ${{ env.BUILD_ENVIRONMENT_URL }}
       TEST_ENVIRONMENT_URL: ${{ env.TEST_ENVIRONMENT_URL }}
       CLIENT_ID: ${{ env.CLIENT_ID }}
