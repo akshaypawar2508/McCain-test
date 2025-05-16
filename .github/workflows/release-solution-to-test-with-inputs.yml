@@ -1,7 +1,4 @@
 name: release-solution-to-test-reusable
-# Reusable workflow
-# convert solution to managed (using a build PowerPlatform environment for the conversion)
-# upload the solution to the GitHub artifacts and deploy to the test environment
 
 on:
   workflow_call:
@@ -42,16 +39,18 @@ on:
         description: 'The tenant ID.'
         type: string
         required: true
-    secrets:
       POWERAPPS:
         description: 'The secret value for authentication using SPN'
+        type: string
         required: true
       SONAR_TOKEN:
         description: 'SonarCloud token'
+        type: string
         required: true
+
 jobs:
   convert-to-managed:
-    runs-on: ubuntu-latest  # Prefer Linux runner to avoid file locking issues
+    runs-on: ubuntu-latest
 
     env:
       RUNNER_DEBUG: 1
@@ -64,7 +63,8 @@ jobs:
     - name: SonarCloud Scan
       uses: SonarSource/sonarqube-scan-action@v5
       env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_TOKEN: ${{ inputs.SONAR_TOKEN }}
+
     - name: Install Power Platform CLI
       uses: akshaypawar2508/powerplatform-actions/actions-install@v0
 
@@ -80,7 +80,7 @@ jobs:
       with:
         environment-url: ${{ inputs.BUILD_ENVIRONMENT_URL }}
         app-id: ${{ inputs.CLIENT_ID }}
-        client-secret: ${{ secrets.POWERAPPS }}
+        client-secret: ${{ inputs.POWERAPPS }}
         tenant-id: ${{ inputs.TENANT_ID }}
         solution-file: ${{ inputs.solution_outbound_folder }}/${{ inputs.solution_name }}.zip
         force-overwrite: true
@@ -91,7 +91,7 @@ jobs:
       with:
         environment-url: ${{ inputs.BUILD_ENVIRONMENT_URL }}
         app-id: ${{ inputs.CLIENT_ID }}
-        client-secret: ${{ secrets.POWERAPPS }} 
+        client-secret: ${{ inputs.POWERAPPS }} 
         tenant-id: ${{ inputs.TENANT_ID }}
         solution-name: ${{ inputs.solution_name }}
         managed: true
@@ -106,6 +106,7 @@ jobs:
   release-to-test:
     needs: convert-to-managed
     runs-on: ubuntu-latest
+
     env:
       RUNNER_DEBUG: 1
 
@@ -113,7 +114,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         lfs: true
-        
+
     - name: Install Power Platform CLI
       uses: akshaypawar2508/powerplatform-actions/actions-install@v0
 
@@ -128,7 +129,7 @@ jobs:
       with:
         environment-url: ${{ inputs.TEST_ENVIRONMENT_URL }}
         app-id: ${{ inputs.CLIENT_ID }}
-        client-secret: ${{ secrets.POWERAPPS }}
+        client-secret: ${{ inputs.POWERAPPS }}
         tenant-id: ${{ inputs.TENANT_ID }}
         solution-file: ${{ inputs.solution_release_folder }}/${{ inputs.solution_name }}_managed.zip
         force-overwrite: true
