@@ -1,0 +1,22 @@
+name: Enforce PR Title Format
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+jobs:
+  check-pr-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR title
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pattern = /^\[solution:[a-zA-Z0-9_-]+\]$/;  // Dynamic solution name
+            const prTitle = context.payload.pull_request.title;
+
+            if (!pattern.test(prTitle)) {
+              core.setFailed(`❌ Invalid PR title: "${prTitle}" does not match the required format.`);
+            } else {
+              console.log("✅ PR title is valid.");
+            }
