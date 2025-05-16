@@ -10,7 +10,8 @@ permissions:
 
 jobs:
   release-solution:
-    runs-on: windows-latest
+
+    runs-on: ubuntu-latest
 
     env:
       BUILD_ENVIRONMENT_URL: 'https://orgebad7637.crm.dynamics.com'
