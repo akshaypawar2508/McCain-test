@@ -78,6 +78,7 @@
       </Addresses>
     </Publisher>
     <RootComponents>
+      <RootComponent type="1" schemaName="creee_testtable2" behavior="0" />
       <RootComponent type="1" schemaName="creee_testtableforcicd" behavior="0" />
     </RootComponents>
     <MissingDependencies />
