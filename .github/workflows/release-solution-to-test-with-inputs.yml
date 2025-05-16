@@ -39,13 +39,12 @@ on:
         description: 'The tenant ID.'
         type: string
         required: true
+    secrets:
       POWERAPPS:
         description: 'The secret value for authentication using SPN'
-        type: string
         required: true
       SONAR_TOKEN:
         description: 'SonarCloud token'
-        type: string
         required: true
 
 jobs:
@@ -63,7 +62,7 @@ jobs:
     - name: SonarCloud Scan
       uses: SonarSource/sonarqube-scan-action@v5
       env:
-        SONAR_TOKEN: ${{ inputs.SONAR_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
     - name: Install Power Platform CLI
       uses: akshaypawar2508/powerplatform-actions/actions-install@v0
@@ -80,7 +79,7 @@ jobs:
       with:
         environment-url: ${{ inputs.BUILD_ENVIRONMENT_URL }}
         app-id: ${{ inputs.CLIENT_ID }}
-        client-secret: ${{ inputs.POWERAPPS }}
+        client-secret: ${{ secrets.POWERAPPS }}
         tenant-id: ${{ inputs.TENANT_ID }}
         solution-file: ${{ inputs.solution_outbound_folder }}/${{ inputs.solution_name }}.zip
         force-overwrite: true
@@ -91,7 +90,7 @@ jobs:
       with:
         environment-url: ${{ inputs.BUILD_ENVIRONMENT_URL }}
         app-id: ${{ inputs.CLIENT_ID }}
-        client-secret: ${{ inputs.POWERAPPS }} 
+        client-secret: ${{ secrets.POWERAPPS }} 
         tenant-id: ${{ inputs.TENANT_ID }}
         solution-name: ${{ inputs.solution_name }}
         managed: true
@@ -129,7 +128,7 @@ jobs:
       with:
         environment-url: ${{ inputs.TEST_ENVIRONMENT_URL }}
         app-id: ${{ inputs.CLIENT_ID }}
-        client-secret: ${{ inputs.POWERAPPS }}
+        client-secret: ${{ secrets.POWERAPPS }}
         tenant-id: ${{ inputs.TENANT_ID }}
         solution-file: ${{ inputs.solution_release_folder }}/${{ inputs.solution_name }}_managed.zip
         force-overwrite: true
