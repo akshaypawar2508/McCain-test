@@ -39,13 +39,12 @@ on:
         description: 'The tenant ID.'
         type: string
         required: true
+    secrets:
       POWERAPPS:
         description: 'The secret value for authentication using SPN'
-        type: string
         required: true
       SONAR_TOKEN:
         description: 'SonarCloud token'
-        type: string
         required: true
 
 jobs:
