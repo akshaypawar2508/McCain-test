@@ -1,0 +1,7 @@
+<card cardid="26d6d305-4e36-f011-8c4e-6045bd06f930">
+  <appdefinition>{"screens":{"main":{"template":{"type":"AdaptiveCard","body":[{"type":"TextBlock","size":"Medium","weight":"bolder","text":"POC-MCCAIN-POWERAPPS","id":"textLabel1"},{"type":"TextBlock","text":"Add and remove element to customize your new card.","wrap":true,"id":"textLabel2"}],"actions":[],"$schema":"http://adaptivecards.io/schemas/1.5.0/adaptive-card.json","version":"1.5"},"verbs":{"submit":"echo"}}},"sampleData":{"main":{}},"connections":{},"variables":{},"flows":{},"locale":"en-US"}</appdefinition>
+  <iscustomizable>1</iscustomizable>
+  <name>Dev-Card-Poc</name>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</card>
