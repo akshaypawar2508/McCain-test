@@ -11,9 +11,9 @@ on:
         required: true
         type: choice
         options:
-          - Akshaydev
+          - mccainsampleappdev
           - Crde66f
-        default: Akshaydev
+        default: mccainsampleappdev
        #Do Not change these values
       solution_exported_folder:
         description: 'folder name for staging the exported solution *do not change*'
