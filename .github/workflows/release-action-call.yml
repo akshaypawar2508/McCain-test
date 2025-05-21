@@ -32,8 +32,8 @@ jobs:
 
           REF_TEXT_LOWER=$(echo "$REF_TEXT" | tr '[:upper:]' '[:lower:]')
 
-          if [[ "$REF_TEXT_LOWER" == *"solution:akshaydev"* ]]; then
-            echo "solution=Akshaydev" >> $GITHUB_OUTPUT
+          if [[ "$REF_TEXT_LOWER" == *"solution:mccainsampleappdev"* ]]; then
+            echo "solution=mccain-sample-app-dev" >> $GITHUB_OUTPUT
           elif [[ "$REF_TEXT_LOWER" == *"solution:crde66f"* ]]; then
             echo "solution=Crde66f" >> $GITHUB_OUTPUT
           else
