@@ -40,7 +40,7 @@ jobs:
 
   call-release-workflow:
     needs: release-solution
-    uses: ./.github/workflows/release-solution-to-test-with-inputs.yml
+    uses: ./.github/workflows/release-solution-to-test.yml
     with:
       solution_name: ${{ needs.release-solution.outputs.solution }}
       BUILD_ENVIRONMENT_URL: 'https://org6e82c998.crm.dynamics.com'
