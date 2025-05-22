@@ -4,9 +4,6 @@ on:
   pull_request:
     branches:
       - Test
-  push:
-    branches:
-      - Test
 
 permissions:
   contents: write
