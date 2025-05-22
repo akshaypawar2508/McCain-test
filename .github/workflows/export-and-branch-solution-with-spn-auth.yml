@@ -11,9 +11,9 @@ on:
         required: true
         type: choice
         options:
-          - Akshaydev
+          - mccainsampleappdev
           - Crde66f
-        default: Akshaydev
+        default: mccainsampleappdev
        #Do Not change these values
       solution_exported_folder:
         description: 'folder name for staging the exported solution *do not change*'
@@ -28,7 +28,7 @@ on:
        required: true
        default: solutions/
 env:
-  ENVIRONMENT_URL: 'https://orgebad7637.crm.dynamics.com'
+  ENVIRONMENT_URL: 'https://org6e82c998.crm.dynamics.com'
   CLIENT_ID: '54b35cb3-ec7d-4f5e-be38-67ed9cf311f3'
   TENANT_ID: 'fd41ee0d-0d97-4102-9a50-c7c3c5470454'
 permissions:

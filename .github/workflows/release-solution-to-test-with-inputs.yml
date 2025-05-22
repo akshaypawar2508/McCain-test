@@ -6,7 +6,7 @@ on:
       solution_name:
         description: 'The solution name.'
         type: string
-        default: Akshaydev       
+        default: mccainsampleappdev       
       solution_shipping_folder:
         description: 'Folder name for staging the exported solution *do not change*'        
         type: string
