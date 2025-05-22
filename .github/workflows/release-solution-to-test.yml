@@ -1,4 +1,4 @@
-name: release-solution-to-test-reusable
+name: release-solution-to-test-environment
 
 on:
   workflow_call:
