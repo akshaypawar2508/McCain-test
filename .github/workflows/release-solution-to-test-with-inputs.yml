@@ -105,6 +105,7 @@ jobs:
   release-to-test:
     needs: convert-to-managed
     runs-on: ubuntu-latest
+    environment: test-release-approval
 
     env:
       RUNNER_DEBUG: 1
