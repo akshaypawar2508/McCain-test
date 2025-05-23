@@ -2,6 +2,7 @@ name: Release action
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, edited]
     branches:
       - Test
 
