@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.25042.234" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.25042.234" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.25043.00216">
+<ImportExportXml version="9.2.25043.216" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.25043.216" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.25043.00216">
   <SolutionManifest>
     <UniqueName>mccainsampleappdev</UniqueName>
     <LocalizedNames>
@@ -80,8 +80,10 @@
       </Addresses>
     </Publisher>
     <RootComponents>
+      <RootComponent type="300" schemaName="new_demomccaindev_45c3c" behavior="0" />
       <RootComponent type="62" schemaName="new_POCSample" behavior="0" />
       <RootComponent type="62" schemaName="new_testappforpoc" behavior="0" />
+      <RootComponent type="80" schemaName="new_POCSample" behavior="0" />
       <RootComponent type="80" schemaName="new_testappforpoc" behavior="0" />
     </RootComponents>
     <MissingDependencies>
@@ -89,7 +91,19 @@
         <Required type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)">
           <package appName="AppModule Web Resources Package" version="2.5">AppModuleWebResources (2.5)</package>
         </Required>
+        <Dependent type="80" schemaName="new_POCSample" displayName="POC-Sample" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)">
+          <package appName="AppModule Web Resources Package" version="2.5">AppModuleWebResources (2.5)</package>
+        </Required>
         <Dependent type="80" schemaName="new_testappforpoc" displayName="test-app-for-poc" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.13)" id.uniquename="AppChannel">
+          <package appName="PowerAppsAppFramework Package" version="1.0.0.18">PowerAppsAppFramework_Anchor (1.0.0.18)</package>
+        </Required>
+        <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=new_POCSample,settingdefinitionid.uniquename=AppChannel" id.parentappmoduleid.uniquename="new_POCSample" id.settingdefinitionid.uniquename="AppChannel" />
       </MissingDependency>
       <MissingDependency>
         <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.13)" id.uniquename="AppChannel">
